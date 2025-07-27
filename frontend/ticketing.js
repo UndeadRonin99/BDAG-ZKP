@@ -12,7 +12,11 @@ const abi = [
 async function init() {
     const buyBtn = document.getElementById('buyBtn');
     const transferBtn = document.getElementById('transferBtn');
-    buyBtn.addEventListener('click', () => buyTicket(0));
+    buyBtn.addEventListener('click', () => {
+        const select = document.getElementById('ticketSelect');
+        const eventId = parseInt(select.value, 10);
+        buyTicket(eventId);
+    });
     transferBtn.addEventListener('click', () => generateProofAndTransfer(0));
 }
 
@@ -32,10 +36,17 @@ async function loadEvents() {
     const events = await contract.getEvents();
     const container = document.getElementById('events');
     container.innerHTML = '';
+    const select = document.getElementById('ticketSelect');
+    select.innerHTML = '';
     events.forEach(ev => {
         const div = document.createElement('div');
         div.innerHTML = `${ev.id}: ${ev.name} - Price: ${ev.price}`;
         container.appendChild(div);
+
+        const opt = document.createElement('option');
+        opt.value = ev.id;
+        opt.textContent = `${ev.name} - ${ethers.utils.formatUnits(ev.price, 18)} BDAG`;
+        select.appendChild(opt);
     });
     document.getElementById('buySection').style.display = 'block';
 }
