@@ -10,6 +10,8 @@ interface IZKPVerifier {
 }
 
 contract Ticketing is ERC721, Ownable {
+    uint256 public constant MIN_PRICE = 10 ether;
+    uint256 public constant MAX_PRICE = 50 ether;
     struct EventInfo {
         string name;
         uint256 price;
@@ -30,6 +32,7 @@ contract Ticketing is ERC721, Ownable {
     }
 
     function createEvent(string calldata name, uint256 price, uint256 tickets) external onlyOwner {
+        require(price >= MIN_PRICE && price <= MAX_PRICE, "Price out of range");
         events[nextEventId] = EventInfo(name, price, tickets);
         nextEventId++;
     }
@@ -44,6 +47,7 @@ contract Ticketing is ERC721, Ownable {
     function buyTicket(uint256 eventId) external {
         EventInfo storage ev = events[eventId];
         require(ev.remaining > 0, "Sold out");
+        require(ev.price >= MIN_PRICE && ev.price <= MAX_PRICE, "Invalid ticket price");
         ev.remaining -= 1;
         require(bdag.transferFrom(msg.sender, owner(), ev.price), "Payment failed");
         _mint(msg.sender, nextTicketId);
