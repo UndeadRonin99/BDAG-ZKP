@@ -29,6 +29,12 @@ contract Ticketing is ERC721, Ownable {
     constructor(address bdagToken, address proofVerifier) ERC721("ZK-Tix", "ZKTIX") {
         bdag = IERC20(bdagToken);
         verifier = IZKPVerifier(proofVerifier);
+
+        // pre-create three ticket types
+        events[0] = EventInfo("Option 1", 10 ether, 1000);
+        events[1] = EventInfo("Option 2", 25 ether, 1000);
+        events[2] = EventInfo("Option 3", 50 ether, 1000);
+        nextEventId = 3;
     }
 
     function createEvent(string calldata name, uint256 price, uint256 tickets) external onlyOwner {
