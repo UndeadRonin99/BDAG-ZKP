@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZK-Tix</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.min.js" integrity="sha256-DGgUMkE8hELiTAAxV8jTwjWF4DwFNhe4okW8uP5cHYc=" crossorigin="anonymous"></script>
     <script src="ticketing.js"></script>
 </head>
 <body>
-    <button onclick="connectWallet()">Connect Wallet</button>
+    <div class="container">
+        <button id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
 
-    <div id="events"></div>
+        <div id="events"></div>
 
-    <div id="buySection" style="display:none;">
-        <button id="buyBtn">Buy Ticket</button>
+        <div id="buySection">
+            <button id="buyBtn">Buy Ticket</button>
+        </div>
+
+        <h3>Transfer Ticket</h3>
+        <input type="text" id="recipient" placeholder="Recipient Wallet Address" />
+        <button id="transferBtn">Transfer Ticket</button>
     </div>
-
-    <h3>Transfer Ticket</h3>
-    <input type="text" id="recipient" placeholder="Recipient Wallet Address" />
-    <button id="transferBtn">Transfer Ticket</button>
 
     <script>
         window.addEventListener('load', function() {
