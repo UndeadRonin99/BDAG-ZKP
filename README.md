@@ -10,4 +10,6 @@ This repository contains a minimal prototype for a zero‑knowledge based event 
 - `contracts/Ticketing.sol` – Solidity contract implementing ticket minting and transfer with proof verification.
 - `circuits/zkp_circuit.circom` – Circom circuit sketch enforcing simple human and anti‑resale rules.
 
+Event prices are restricted on-chain to between **10** and **50** BDAG tokens to keep ticket costs reasonable.
+
 The project is intentionally lightweight and focuses on demonstrating how ZK proofs could restrict ticket transfers without revealing user identities.
