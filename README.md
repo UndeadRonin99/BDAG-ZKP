@@ -7,3 +7,8 @@ This project provides basic arithmetic operations implemented in JavaScript. It 
 ```
 npm test
 ```
+
+## Demo
+
+Open `index.html` in a browser to try the calculator in a simple web interface.
+
